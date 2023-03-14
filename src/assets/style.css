@@ -1,12 +1,24 @@
+@import url(reset.css);
+
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
+    width: 100%;
     color: #2c3e50;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 25px;
     
   }
   body {
-    padding : 0;
-    margin: 0;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(to right, #ac1282, #9adcea );
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }

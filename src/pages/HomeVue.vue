@@ -7,19 +7,16 @@
 </template>
 
 <script>
-import HeaderVue from './HeaderVue.vue'
-import BodyVue from './BodyVue.vue'
-import ListVue from "./ListVue.vue"
-import TemoingnageVue from "./TemoingnageVue.vue"
-
-import FooterVue from "./FooterVue.vue"
+import HeaderVue from '../components/HeaderVue.vue'
+import BodyVue from '../components/BodyVue.vue'
+import ListVue from "../components/ListVue.vue"
+import TemoingnageVue from "../components/TemoingnageVue.vue"
+import FooterVue from "../components/FooterVue.vue"
 export default {
     name : 'HomeVue',
     methods:{
-        Cliker(){
-            
-            this.$router.push({name:'RegisterUp'});
-            
+        Cliker(){          
+            this.$router.push({name:'RegisterUp'});          
         },
         Clicker(){
             this.$router.push({name:'LoginUp'});

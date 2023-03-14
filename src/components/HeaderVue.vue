@@ -1,51 +1,47 @@
 <template>
     <input type="checkbox" id="check">
     <div class="navbar">
-        <div class="nav">
-            <img :src="logoIcon" width="55" height="55" />
-        </div>
+        <div class="logo">
+            <img src="../assets/Logo.png" />
+            <div class="nav-title">
+                <h2>Libère-toi</h2>
+            </div>
+            <div class="nav-link">
+                <ul>          
+                    <li>
+                        <a href="#" v-on:click="Clicker0">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Blog</a>
+                    </li>  
+                </ul>
+            </div>
+        </div>       
         <div class="searchbox">
-            <input type="text" placeholder="Search here ..."/>
+            <input type="text" placeholder="Recherche..."/>
             <i class="fa fa-search"></i>
         </div>
-        <ul>
-            
-            <li>
-                <a href="#" v-on:click="Clicker0">Home</a>
-            </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-            <li>
-                <a href="#">Blog</a>
-            </li>
-            <li>
-                <a href="#" v-on:click="Clicker">Login</a>
-            </li>
-            <li>
-                <a href="#" v-on:click="Cliker">Register</a>
-            </li>
-            <label class="bar" for="check">
-                <i class="fa fa-bars" id="bars"></i>
-                <i class="fa fa-times" id="times"></i>
-            </label>
-            
-        </ul>
-
-        
+        <div class="connexion">
+                    <a href="#" v-on:click="Clicker">Se connecter</a>
+                    <button v-on:click="Cliker">S'inscrire</button>
+        </div>
+        <label class="bar" for="check">
+        <i class="fa fa-bars" id="bars"></i>
+        <i class="fa fa-times" id="times"></i>
+    </label>
     </div>
 </template>
 
 <script>
-import Logo from '../assets/Logo.jpg';
+import Logo from '../assets/Logo.png';
 export default {
     name : 'HeaderVue',
     methods:{
-        Cliker(){
-            
+        Cliker(){    
             this.$router.push({name:'RegisterUp'});
-            
-
         },
         Clicker(){
             this.$router.push({name:'LoginUp'});
@@ -61,182 +57,291 @@ export default {
     }
 }
 </script>
+
 <style>
 .navbar{
-    background-color:#24262b;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 24px;
-    padding-right: 24px;
+    background: rgba(255, 255, 255, .7);
+    padding: 3px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    position: -webkit-sticky; 
+    position: sticky;
+    z-index:10;
+    top: 0;
+    gap: 3px;
 }
-nav {
+
+/* La partie gauche */
+.navbar .logo {
     display: flex;
+    justify-content: start;
     align-items: center;
+    flex-wrap: nowrap;
+    flex-grow: 0.5;
 }
-ul{
+
+.navbar .logo img {
+    height: 65px;
+    width: 65px;
+    cursor: pointer;
+}
+
+.navbar .logo .nav-title h2 {
+    white-space: nowrap;
+    color: #ac1282;
+    cursor: pointer;
+}
+
+.navbar .logo .nav-link {
+    display: flex;
+    justify-content: start;
+}
+
+.navbar .logo .nav-link ul {
     display:flex;
-    align-items: center; 
+    align-items :center; 
     list-style-type: none;
-    margin: 0 10px;
+} 
+
+.navbar .logo .nav-link li {
+    margin-left: 15px; 
+    list-style: none;
+    display: inline-block;
 }
-li{
-   margin-left: 16px; 
-   list-style: none;
- /*  display: inline-block;*/
-   
-}
-li a{
+
+.navbar .logo .nav-link li a {
     font-size: 18px;
     text-transform: capitalize;
-    color: #ffffff;
+    color: #000000;
     text-decoration: none;
     font-weight: 300;
-    color: #ffffff;
     transition: all 0.3s ease;
 }
-li a:hover {
-    color: #ac1282;
-    padding-left: 10px;
+
+.navbar .logo .nav-link li a:hover {
+    color: #9adcea ;
+    /* padding-left: 10px; */
 }
 
-.navbar ul .search{
-    position: relative;
-    left: 30px;
+/* La partie droite */
+.navbar .connexion {
     display: flex;
-    justify-content: center;
+    justify-content:end;
     align-items: center;
-    font-size: 1.5em;
-    z-index: 10;
-    cursor: pointer;
+    padding-right: 10px;
 }
-.searchbox{
-    display: flex;
-    margin : auto 0;
-    height : 35px;
-    line-height: 35px;
-/*
-    position: absolute;
 
+.navbar .connexion a {
+    font-size: 18px;
+    padding: 9px 10px;
+    color: #000000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
 
-    right: 100%;
-    width: 100%;
-    height: 100%;
-   
-    background: #fff;
-    align-items: center;
-    padding: 0 30px;
-    transition: 0.5s ease-in-out;*/
+.navbar .connexion a:hover {
+    color: #da17a6;
 }
-.searchbox input{
-    width: 350px;
-    border: none;
-    outline: none;
-    height: 100%;
-    color: #ac1282;
-    font-size: 20px;
-    background: #fff;
-    border-bottom: 1px solid rgba(0,0,0,0.5);
-    padding: 0 10px;
-}
-.searchbox i{
-    color: #24262b;
-    font-size: 20px;
-    background: #fff;
-    height: 73%;
-    padding: 5px;
-    position: relative;
-    cursor: pointer;
-    z-index: 1;
-}
-.searchbox i:hover{
-    color: #fff;
-}
-.searchbox i::after{
-    height: 100%;
-    width: 0%;
-    content: '';
+
+.navbar .connexion button {
     background: #ac1282;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: 0.3s;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    font-size: 16px;
+    color: #ffffff;
 }
-.searchbox i:hover::after{
-    width: 100%;
+
+.navbar .connexion button:hover {
+    background: #da17a6;
 }
+
+/* Searchbox  */
+.navbar .searchbox {
+    height: 40px;
+    display: flex;
+    cursor: pointer;
+    padding: 10px 20px;
+    background: #ffffffcb;
+    border-radius: 30px;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.navbar .searchbox input {
+    width: 400px;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    transition: 0.8s;
+    background: transparent;
+}
+
+.navbar .searchbox a .fas {
+    color: #1daf;
+    font-size: 18px;
+}
+
 .navbar .bar{
     position: relative;
     margin: auto;
     display: none;
 }
+
 .navbar .bar i{
     position: absolute;
-    color: #fff;
+    color: #000000;
     font-size: 35px;
-
 }
+
 input[type="checkbox"]{
    /* -webkit-appearance: none;*/
     display: none;
 }
+
+/* Responsive */
 @media screen and (max-width: 1250px) {
+    .navbar .searchbox input {
+    width:0px;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    transition: 0.8s;
+    background: transparent;
+    }
+
+    .navbar .searchbox:hover input {
+    width: 400px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
     .navbar{
-        display: block;
+        display: flex;
+        flex-direction: column;
         padding: 0;
+        height: 10vh;
     }
-    .navbar .nav{
+
+    .navbar .logo {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navbar .logo img{
         display: inline-block;
-        padding: 15px 30px; 
+        height: 65px;
+        width: 65px;
+        cursor: pointer;
+        /* padding: 15px 30px;  */
     }
+
+    .navbar .logo .nav-title h2 {
+        visibility: hidden;
+    }
+    .navbar .logo .nav-link ul{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-right: 50px;
+        visibility: collapse;
+    }
+
+    .navbar .logo .nav-link li {
+        list-style: none;
+        display: inline-block;
+    }
+
     .navbar .searchbox{
-        width: 100%;
+        width: 95%;
         display: inline-flex;
         justify-content: center;
         margin-bottom: 15px;
+        visibility: collapse;
     }
+
     .navbar .searchbox input{
-        width: 90%;
+        width: 85%;
     }
-    .navbar ul{
+
+    .navbar .connexion {
         display: flex;
         flex-direction: column;
-        background: #fff;
-        height: 0;
-        visibility: visible;
-        transition: 0.3s;
+        visibility: hidden;
     }
-    .navbar ul li{
-        text-align: center;
-    }
-    .navbar ul li a{
-        color: #24262b;
-        font-size: 25px;
-        padding: 25px;
-        display: block;
-    }
+
     .navbar .bar{
         display: block;
         position: absolute;
-        top: 20px;
+        top: 24px;
         right: 80px;
         cursor: pointer;
     }
+
     .navbar .bar #times{
         display: none;
     }
+
     #check:checked ~ .navbar .bar #times{
         display: block;
     }
+
     #check:checked ~ .navbar .bar #bars{
         display: none;
     }
-    #check:checked ~ .navbar ul{
-        visibility: visible;
-        height: 400px;
+
+    #check:checked ~ .navbar {
+        height: auto;
     }
+    
+    #check:checked ~ .navbar .logo .nav-link ul {
+        visibility: visible;
+    }
+
+    #check:checked ~ .navbar .logo .nav-title h2 {
+        visibility: visible;
+    }
+
+    #check:checked ~ .navbar .navbar .searchbox {
+        visibility: visible;
+    }
+
+    #check:checked ~ .navbar .connexion {
+        visibility: visible;
+    }
+    /* #check:checked ~ .navbar .connexion,
+                    .navbar .searchbox,
+                    .navbar .logo .nav-link ul{
+        visibility: visible;
+    } */
 }
 </style>

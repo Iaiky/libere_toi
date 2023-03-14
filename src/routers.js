@@ -1,14 +1,16 @@
-import HomeVue from './components/HomeVue.vue'
+import HomeVue from './pages/HomeVue.vue'
 import RegisterUp from './components/RegisterUp'
 import LoginUp from './components/LoginUp'
-import AboutUs from './components/pages/AboutUs'
-import ServicesVue from './components/pages/ServicesVue'
-import PrivacyPolicy from './components/pages/PrivacyPolicy'
-import AffiliateProgram from './components/pages/AffiliateProgram'
-import FaQ from './components/pages/FaQ'
-import ShippingVue from './components/pages/ShippingVue'
-import OrderStatuts from './components/pages/OrderStatuts'
-import PayementOptions from './components/pages/PayementOptions'
+import AboutUs from './pages/AboutUs'
+import ServicesVue from './pages/ServicesVue'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import AffiliateProgram from './pages/AffiliateProgram'
+import FaQ from './pages/FaQ'
+import ShippingVue from './pages/ShippingVue'
+import OrderStatuts from './pages/OrderStatuts'
+import PayementOptions from './pages/PayementOptions'
+import VendeurPage from './pages/Vendeur.vue'
+
 import {createRouter,createWebHistory} from 'vue-router'
 
 const routes = [
@@ -66,6 +68,11 @@ const routes = [
         name : 'PayementOptions',
         component : PayementOptions,
         path: '/PayementOptions'
+    },
+    {
+        name : 'VendeurPage',
+        component : VendeurPage,
+        path: '/vendeur'
     },
     
 ];

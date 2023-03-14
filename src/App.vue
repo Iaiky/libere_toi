@@ -12,4 +12,6 @@ export default {
 <style>
 @import './assets/style.css';
 
+
+
 </style>
