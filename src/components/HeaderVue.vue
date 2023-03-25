@@ -9,7 +9,7 @@
             <div class="nav-link">
                 <ul>          
                     <li>
-                        <a href="#" v-on:click="Clicker0">Home</a>
+                        <a href="#" v-on:click="Home">Home</a>
                     </li>
                     <li>
                         <a href="#">Services</a>
@@ -46,8 +46,8 @@ export default {
         Clicker(){
             this.$router.push({name:'LoginUp'});
         },
-        Clicker0(){
-            this.$router.push({name:'HomeVUE'});
+        Home(){
+            this.$router.push({name:'HomeVue'});
         },
     },
     data(){

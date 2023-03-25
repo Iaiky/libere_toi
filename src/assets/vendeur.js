@@ -9,23 +9,32 @@ const vendeur =
         service : [
             {
                 ids:1,
-                noms:'service 1',
-                nombre:'4545'
+                noms:'Service 1',
+                nombre:'4545',
+                        
+                desc:'Je vais créer votre site Fron-End',
+                src : 'front-end.jpg'
             },
             {
                 ids:2,
-                noms:'service 2',
-                nombre:'486'
+                noms:'Service 2',
+                nombre:'486',
+                desc:'Je vais créer votre site Fron-End',
+                src : 'site.png'
             },
             {
                 ids:3,
-                noms:'service 3',
-                nombre:'22222'
+                noms:'Service 3',
+                nombre:'22222',
+                desc:'Je vais créer votre site Fron-End',
+                src : 'backend.jpg'
             },
             {
                 ids:4,
-                noms:'service 4',
-                nombre:'4853'
+                noms:'Service 4',
+                nombre:'4853',
+                desc:'Je vais créer votre site Fron-End',
+                src : 'Graphic Designer.jpg'
             }
         ]
     }

@@ -36,13 +36,12 @@
                             <li><a href="#">contact</a></li>
                         </ul>
                         <button>Message</button>
+                        <button>Créer un services</button>
                     </nav>
 
                     <div class="photos">
                         <div class="list-serv" v-for="item in vendeur.service" :key="item.ids">
-                            <p>{{ item.desc }}</p>
-                            
-                            <img :src="require(`../assets/${item.src}`)" alt="" class="card-img1">
+                            <p>{{ item.nombre }}</p>
                             <p>{{ item.noms }}</p>
                         </div>
                     </div>
@@ -57,7 +56,7 @@
 
     import vendeur from '../assets/vendeur'
     export default {
-        name :'VendeurPage',
+        name :'VendeurServices',
         data() {
             return {
                 vendeur : vendeur

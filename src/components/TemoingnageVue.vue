@@ -88,9 +88,6 @@
         background-color: transparent;
     }
 
-    .temoignage .temoin-title h1{
-        
-    }
 
     .slide-container {
         max-width: 1170px;
