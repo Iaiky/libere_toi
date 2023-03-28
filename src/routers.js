@@ -20,6 +20,12 @@ import DashboardVendeur from './pages/dashboard/DashboardVendeur.vue'
 import DashboardService from './pages/dashboard/DashboardService.vue'
 import DashboardValidation from './pages/dashboard/DashboardValidation.vue'
 
+//Client and service page
+import ClientPage from './pages/ClientPage.vue'
+import ServicesAv from './pages/ServicesAv.vue'
+import VendeurServices from './pages/VendeurServices.vue'
+
+import CreationServices from './pages/CreationServices.vue'
 import {createRouter,createWebHistory} from 'vue-router'
 
 const routes = [
@@ -119,6 +125,25 @@ const routes = [
         name : 'DashboardValidation',
         component : DashboardValidation,
         path: '/dashboardValidation'
+    },
+        name : 'ClientPage',
+        component : ClientPage,
+        path: '/client'
+    },
+    {
+        name : 'ServicesAv',
+        component : ServicesAv,
+        path: '/Services'
+    },
+    {
+        name : 'VendeurServices',
+        component : VendeurServices,
+        path: '/vendeurservices'
+    },
+    {
+        name : 'CreationServices',
+        component : CreationServices,
+        path: '/creationservices'
     },
     
 ];

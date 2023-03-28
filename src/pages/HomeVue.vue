@@ -1,7 +1,7 @@
 <template>
     <HeaderVue/>
     <BodyVue/>
-    <ListVue />
+    <ListeService />
     <TemoingnageVue />
     <FooterVue/>
 </template>
@@ -9,7 +9,8 @@
 <script>
 import HeaderVue from '../components/HeaderVue.vue'
 import BodyVue from '../components/BodyVue.vue'
-import ListVue from "../components/ListVue.vue"
+
+import ListeService from "../components/ListeService.vue"
 import TemoingnageVue from "../components/TemoingnageVue.vue"
 import FooterVue from "../components/FooterVue.vue"
 export default {
@@ -49,7 +50,7 @@ export default {
     components :{
         HeaderVue,
         BodyVue,
-        ListVue,
+        ListeService,
         TemoingnageVue,
         FooterVue
 
