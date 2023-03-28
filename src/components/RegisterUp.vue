@@ -23,45 +23,51 @@
                     </div>
                     <div class="form-item">
                         <div class="form-item-icon"><i class="fa fa-phone"></i></div>
-                        <input type="tel" v-model="telephone" placeholder="Numéro de téléphone" required>
+                        <input type="tel" v-model="tel" placeholder="Numéro de téléphone" required>
                     </div>
                     <div class="form-item">
                         <div class="form-item-icon"><i class="material-icons">&#xe897;</i></div>
-                        <input type="password" v-model="password" placeholder="Mot de passe" required>
+                        <input type="password" v-model="mdp" placeholder="Mot de passe" required>
                     </div>
                     <div class="usertype">
                         <p>Veuillez choisir une catégorie, vous avez le choix entre vendeur et client selon vos besoins:</p>
                         <div class="type">
                             <div class="radio">
-                                <input type="radio" id="client" value="client" v-model="usertype" />
+                                <input type="radio" id="client" value="2" v-model="type" />
                                 <label for="client">Client</label>
                             </div>
                             <div class="radio">
-                                <input type="radio" id="vendeur" value="vendeur" v-model="usertype" />
+                                <input type="radio" id="vendeur" value="3" v-model="type" />
                             <label for="vendeur">Vendeur</label>
                             </div>   
                         </div>
-                        <div class="register-vendeur" v-show="usertype==='vendeur'">
+
+                        <!-- Vendeur -->
+                        <div class="register-vendeur" v-show="type==='3'">
                             <p>En tant que vendeur, vous pouvez suggérez vos services.</p>
                             <div class="form-item">
                                 <div class="form-item-icon"><i class="fa fa-phone"></i></div>
-                                <input type="text" v-model="CIN" placeholder="Numéro de CIN ou passeport" required>
+                                <input type="text" v-model="CIN_Passeport" placeholder="Numéro de CIN ou passeport">
                             </div>
                         </div>
-                        <div class="register-client" v-show="usertype==='client'">
+
+                        <!-- client -->
+                        <div class="register-client" v-show="type==='2'">
                             <p>En tant que client, vous pouvez rechercher des services.</p>
                         </div>
                     </div>
                     <button v-on:click="register">S'inscrire</button>
                 </form>
                 <div class="login-card-footer">
-                    Vous avez déja un compte? <a href="#">Connectez-vous ici</a>
+                    Vous avez déja un compte? <router-link to="/LoginUp">Connectez-vous ici</router-link>
                 </div>
             </div>
         </div>
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default{
         name:'RegisterPage',
         data(){
@@ -69,15 +75,31 @@
                 nom:'',
                 prenom:'',
                 email:'',
-                telephone:'',
-                password:'',
-                CIN:'',
-                usertype:'client'
+                tel:'',
+                mdp:'',
+                CIN_Passeport: '',
+                type: 2
             }
         },
         methods:{
             async register(){
+                var qs = require('qs');
+                let result = await axios.post("http://localhost:3000/clients/",
+                    qs.stringify({
+                        nom:this.nom,
+                        prenom:this.prenom,
+                        email:this.email,
+                        tel:this.tel,
+                        mdp:this.mdp,
+                        CIN_Passeport:this.CIN_Passeport,
+                        type:this.type,
+                    })
+                );
 
+                console.warn(result);
+                if(result.status==200){
+                    this.$router.push({name:'LoginUp'});
+                }
             }
         },
         mounted(){

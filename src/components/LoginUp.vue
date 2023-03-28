@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-item">
                         <div class="form-item-icon"><i class="material-icons">&#xe897;</i></div>
-                        <input type="password" v-model="password" placeholder="Mot de passe" required>
+                        <input type="password" v-model="mdp" placeholder="Mot de passe" required>
                     </div>
                     <div class="form-item-other">
                         <div class="checkbox">
@@ -24,7 +24,7 @@
                         </div>
                         <a href="#">Mot de passe oublié?</a>
                     </div>
-                    <button v-on:click="login">Se connecter</button>
+                    <button v-on:click="Login">Se connecter</button>
                 </form>
                 <div class="login-card-footer">
                     Pas de compte? <a href="./inscription.html">Créer gratuitement ici</a>
@@ -33,12 +33,9 @@
             <div class="login-card-social">
                 <div>Autres authentifications</div>
                 <div class="login-card-social-btn">
-                    <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-google" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M17.788 5.108a9 9 0 1 0 3.212 6.892h-8"></path>
-                        </svg>
-                    </a>
+                    <router-link to="/">
+                        <i class="fas fa-home" />
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -46,22 +43,39 @@
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default{
         name:'LoginPage',
         data(){
             return{
                 email:'',
-                password:'',
+                mdp:'',
                 checked:false
             }
         },
         methods:{
-            async login(){
+            async Login(){
+                var qs = require('qs');
+                let result = await axios.post("http://localhost:3000/clients/auth",
+                    qs.stringify({
+                        email:this.email,
+                        mdp:this.mdp
+                    })
+                );
 
+                console.warn(result);
+                if(result.status==200){
+                    localStorage.setItem("user-info",JSON.stringify(result.data))
+                    this.$router.push({name:'HomeVue'})
+                }
             }
         },
         mounted(){
-
+            let user = localStorage.getItem('user-info');
+            if(user){
+                this.$router.push({name:'HomeVue'})
+            }
         }
     }
 </script>
