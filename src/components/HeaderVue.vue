@@ -24,7 +24,16 @@
             <input type="text" placeholder="Recherche..."/>
             <i class="fa fa-search"></i>
         </div>
-        <div class="connexion">
+        
+        <div class="connexion" v-if="user" >    
+            <div class="imgText">
+                <div class="userimg">
+                    <img :src="require(`../assets/Z.jpg`)" alt="" class="cover">
+                </div>
+            </div>        
+            <button v-on:click="logout"><i class="fas fa-sign-out" /> Se déconnecter</button>
+        </div>
+        <div class="connexion" v-else >
                     <a href="#" v-on:click="Clicker">Se connecter</a>
                     <button v-on:click="Cliker">S'inscrire</button>
         </div>
@@ -49,12 +58,27 @@ export default {
         Home(){
             this.$router.push({name:'HomeVue'});
         },
+        logout(){
+                localStorage.clear();
+                this.$router.push({name:'LoginUp'});
+        },
+        prenom(xD){
+            let nom
+            nom = JSON.parse(xD)[0].prenom;
+            return nom 
+        }
     },
     data(){
         return{
-            logoIcon: Logo
+            logoIcon: Logo,
+            user : ''
         }
-    }
+    },
+    async mounted(){
+            this.user = localStorage.getItem('user-info');
+            // this.username= JSON.parse(user)[0].prenom;
+            // this.usertype= JSON.parse(user)[0].usertype;
+        }
 }
 </script>
 
@@ -204,6 +228,41 @@ export default {
 input[type="checkbox"]{
    /* -webkit-appearance: none;*/
     display: none;
+}
+
+.imgText {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+}
+
+.imgText h4 {
+    font-weight: 500;
+    line-height: 1.2em;
+    margin-left: 15px;
+}
+
+.imgText h4 span {
+    font-size: 0.8em;
+    color: #555;
+}
+.userimg {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.userimg .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
 }
 
 /* Responsive */

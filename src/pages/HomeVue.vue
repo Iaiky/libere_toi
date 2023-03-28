@@ -54,7 +54,14 @@ export default {
         TemoingnageVue,
         FooterVue
 
-    }
-
+    },
+        async mounted(){
+            // let user = localStorage.getItem('user-info');
+            // this.name= JSON.parse(user)[0].name;
+            // this.usertype= JSON.parse(user)[0].usertype;
+            // if(!user){
+            //     this.$router.push({name:'LoginUp'})
+            // }
+        }
 }
 </script>
