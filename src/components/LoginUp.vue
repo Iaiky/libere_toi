@@ -11,7 +11,9 @@
                 <form class="login-card-form">
                     <div class="form-item">
                         <div class="form-item-icon"><i class="material-icons">&#xe0be;</i></div>
-                        <input type="text" v-model="email" placeholder="Adresse email" required autofocus>
+
+                        <input type="text" v-model="email" placeholder="adresse email" required autofocus>
+
                     </div>
                     <div class="form-item">
                         <div class="form-item-icon"><i class="material-icons">&#xe897;</i></div>
