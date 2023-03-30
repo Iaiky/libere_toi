@@ -126,6 +126,7 @@ const routes = [
         component : DashboardValidation,
         path: '/dashboardValidation'
     },
+        {
         name : 'ClientPage',
         component : ClientPage,
         path: '/client'
