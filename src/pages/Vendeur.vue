@@ -33,9 +33,9 @@
                         <ul>
                             <li><a href="#">Service</a></li>
                             <li><a href="#">historique</a></li>
-                            <li><a href="#">contact</a></li>
+                           
                         </ul>
-                        <button>Message</button>
+                        <button v-on:click="Message">Message</button>
                     </nav>
 
                     <div class="photos">
@@ -64,7 +64,11 @@
             }
         },
         methods:{
-
+            Message(){
+            
+            this.$router.push({name:'ChatPage'});
+            
+        },
         },
         components:{
             HeaderVue

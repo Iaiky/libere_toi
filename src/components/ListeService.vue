@@ -4,15 +4,13 @@
             <div class="list-title">
                 <h1>Exemple des liste de services</h1>
             </div> 
-            <div class="list-list-1">
+            <div class="list-list-1" v-on:click="Voir">
                 <div class="AV-1" v-for="item in ListAV" :key="item.id">
                         
                         <div class="card-image1">
                                 <h2 class="name">{{ item.desc }}</h2>
                                 <img :src="require(`../assets/${item.src}`)" alt="" class="card-img1">
-                                <div class="button-begin1">
-                                    <button v-on:click="Cliker">Voir plus...</button>
-                                </div>
+                                
                         </div>
                 </div>
             </div> 
@@ -30,7 +28,7 @@
             }
         },
         methods:{
-            Cliker(){
+            Voir(){
             
             this.$router.push({name:'ServicesAv'});
             
@@ -84,6 +82,7 @@
         justify-content: center;
         border-radius: 8px;
         padding: 20px;
+        padding-top: 0;
         font-size: 23px;
         font-weight: 500;
         cursor: pointer;
