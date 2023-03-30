@@ -24,6 +24,7 @@ import DashboardValidation from './pages/dashboard/DashboardValidation.vue'
 import ClientPage from './pages/ClientPage.vue'
 import ServicesAv from './pages/ServicesAv.vue'
 import VendeurServices from './pages/VendeurServices.vue'
+import ProfilClient from './pages/ProfilClient.vue'
 
 import CreationServices from './pages/CreationServices.vue'
 import {createRouter,createWebHistory} from 'vue-router'
@@ -125,7 +126,7 @@ const routes = [
         name : 'DashboardValidation',
         component : DashboardValidation,
         path: '/dashboardValidation'
-    },
+    },{
         name : 'ClientPage',
         component : ClientPage,
         path: '/client'
@@ -145,7 +146,11 @@ const routes = [
         component : CreationServices,
         path: '/creationservices'
     },
-    
+    {
+        name : 'ProfilClient',
+        component : ProfilClient,
+        path: '/Profil'
+    }
 ];
 const router = createRouter({
     history : createWebHistory(),
