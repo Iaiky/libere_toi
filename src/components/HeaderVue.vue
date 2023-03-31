@@ -26,11 +26,12 @@
         </div>
         
         <div class="connexion" v-if="user" >    
-            <div class="imgText">
+            <div class="imgText" v-on:click="DirectToPofil(usertype)" >
                 <div class="userimg">
                     <img :src="require(`../assets/Z.jpg`)" alt="" class="cover">
                 </div>
             </div>        
+            <p>{{ username }}</p>
             <button v-on:click="logout"><i class="fas fa-sign-out" /> Se déconnecter</button>
         </div>
         <div class="connexion" v-else >
@@ -59,26 +60,40 @@ export default {
             this.$router.push({name:'HomeVue'});
         },
         logout(){
-                localStorage.clear();
-                this.$router.push({name:'LoginUp'});
+            localStorage.clear();
+            this.$router.push({name:'LoginUp'});
         },
-        prenom(xD){
-            let nom
-            nom = JSON.parse(xD)[0].prenom;
-            return nom 
-        }
+        DirectToPofil(xy){
+            if (xy===2){
+                return this.$router.push({name:'ProfilClient'});
+            }else if (xy===3){
+                return this.$router.push({name:'VendeurPage'});
+            }else {
+                return this.$router.push({name:'Dashboard'});
+            }
+        }          
     },
     data(){
         return{
             logoIcon: Logo,
-            user : ''
+            user : '',
+            username:'',
+            usertype:''
         }
     },
-    async mounted(){
-            this.user = localStorage.getItem('user-info');
-            // this.username= JSON.parse(user)[0].prenom;
-            // this.usertype= JSON.parse(user)[0].usertype;
-        }
+    // async mounted(){
+    //         let users = localStorage.getItem('user-info');
+    //         this.user = users;           
+    //         this.username = JSON.parse(users).data[0].prenom;
+    //         this.usertype= JSON.parse(users).data[0].type;
+    // },
+    async created(){
+            let users = localStorage.getItem('user-info');
+            this.user = users;           
+            this.username = JSON.parse(users).data[0].prenom;
+            this.usertype= JSON.parse(users).data[0].type;
+    },
+   
 }
 </script>
 
@@ -236,6 +251,7 @@ input[type="checkbox"]{
     justify-content: center;
     align-items: center;
     margin-right: 12px;
+    cursor: pointer;
 }
 
 .imgText h4 {
