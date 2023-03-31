@@ -25,6 +25,8 @@ import ClientPage from './pages/ClientPage.vue'
 import ServicesAv from './pages/ServicesAv.vue'
 import VendeurServices from './pages/VendeurServices.vue'
 import ProfilClient from './pages/ProfilClient.vue'
+import ModalTest from './pages/ModalTest.vue'
+import ListeService from './components/ListeService.vue'
 
 import CreationServices from './pages/CreationServices.vue'
 import {createRouter,createWebHistory} from 'vue-router'
@@ -151,7 +153,17 @@ const routes = [
         name : 'ProfilClient',
         component : ProfilClient,
         path: '/Profil'
-    }
+    },
+    {
+        name : 'ListeService',
+        component : ListeService,
+        path: '/ListeService'
+    },
+    {
+        name : 'ModalTest',
+        component : ModalTest,
+        path: '/ModalTest'
+    },
 ];
 const router = createRouter({
     history : createWebHistory(),

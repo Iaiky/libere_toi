@@ -12,7 +12,7 @@
                         <a href="#" v-on:click="Home">Home</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a href="#" v-on:click="Services">Services</a>
                     </li>
                     <li>
                         <a href="#">Blog</a>
@@ -57,6 +57,9 @@ export default {
         },
         Home(){
             this.$router.push({name:'HomeVue'});
+        },
+        Services(){
+            this.$router.push({name:'ListeService'});
         },
         logout(){
                 localStorage.clear();

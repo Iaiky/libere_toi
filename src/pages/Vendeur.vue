@@ -39,7 +39,7 @@
                     </nav>
 
                     <div class="photos">
-                        <div class="list-serv" v-for="item in vendeur.service" :key="item.ids">
+                        <div v-on:click="toggleModale" class="list-serv" v-for="item in vendeur.service" :key="item.ids">
                             <p>{{ item.desc }}</p>
                             
                             <img :src="require(`../assets/${item.src}`)" alt="" class="card-img1">
@@ -49,6 +49,7 @@
                 </div>
             </div>
         </div>
+        <modale v-bind:revele="revele" v-bind:toggleModale="toggleModale"></modale>
     </div>
 </template>
 
@@ -56,11 +57,13 @@
     import HeaderVue from '../components/HeaderVue.vue'
 
     import vendeur from '../assets/vendeur'
+    import ModalTest from './ModalTest'
     export default {
         name :'VendeurPage',
         data() {
             return {
-                vendeur : vendeur
+                vendeur : vendeur,
+                revele : false
             }
         },
         methods:{
@@ -69,9 +72,13 @@
             this.$router.push({name:'ChatPage'});
             
         },
+        toggleModale: function(){
+            this.revele = !this.revele
+        },
         },
         components:{
-            HeaderVue
+            HeaderVue,
+            'modale': ModalTest
         }
     }
 </script>

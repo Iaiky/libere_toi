@@ -82,7 +82,7 @@
         justify-content: center;
         border-radius: 8px;
         padding: 20px;
-        padding-top: 0;
+        padding-top: 20px;
         font-size: 23px;
         font-weight: 500;
         cursor: pointer;

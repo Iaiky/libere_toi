@@ -30,7 +30,6 @@
                             <p class="description">
                                 {{ item.description }}
                             </p>
-                            <button class="btn">Voir plus...</button>
                         </div>
                     </div>
                 </div>
