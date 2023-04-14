@@ -2,15 +2,14 @@
     <div class="list-AV">
         <div class="liste">
             <div class="list-title">
-                <h1>Exemple des liste de services</h1>
+                <h1>Catégorie de services</h1>
             </div> 
             <div class="list-list-1" v-on:click="Voir">
-                <div class="AV-1" v-for="item in ListAV" :key="item.id">
+                <div class="AV-1" v-for="item in listeCategorie" :key="item.categorie">
                         
                         <div class="card-image1">
-                                <h2 class="name">{{ item.desc }}</h2>
-                                <img :src="require(`../assets/${item.src}`)" alt="" class="card-img1">
-                                
+                                <h2 class="name">{{ item.titre }}</h2>
+                                <img :src="require(`../assets/image/${item.source}`)" alt="" class="card-img1">                             
                         </div>
                 </div>
             </div> 
@@ -19,12 +18,14 @@
     </div>
 </template>
 <script>
-    import services from "../assets/services"
+    // import services from "../assets/services"
+    import axios from 'axios'
+
     export default{
         name:'ListVue',
         data(){
             return{
-                ListAV : services
+                listeCategorie : []
             }
         },
         methods:{
@@ -33,16 +34,17 @@
             this.$router.push({name:'ServicesAv'});
             
         },
-            async login(){
-
-            }
+        async loadData(){
+                let result = await axios.get("http://localhost:3000/categorie/listeCategorie");
+                this.listeCategorie = result.data.data;
+            },
         },
         mounted(){
-            
+            this.loadData();
         }
     }
 </script>
-<style>
+<style scoped>
     .list-AV {
         display: flex;
         justify-content: center;
@@ -76,13 +78,13 @@
 
     .list-AV .liste .list-list-1 .AV-1 {
         width: 320px;
+        height: 280px;
         background: white;
         display: flex;
         flex-direction: column;
         justify-content: center;
         border-radius: 8px;
-        padding: 20px;
-        padding-top: 20px;
+        padding:0;
         font-size: 23px;
         font-weight: 500;
         cursor: pointer;
@@ -95,8 +97,8 @@
     }
 
     .card-image1 {
-        height: 100%;
-        width: 100%;
+        height: 280px;
+        width: 320px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -107,9 +109,10 @@
         font-size: 23px;
     }
 
-    .card-image .card-img1 {
-        height: 100%;
-        width: 100%;
+    .card-image1 img {
+        max-height: 195px;
+        max-width: 292px;
+        border-radius: 5px;
     }
  .button-begin1 button{
         border: none;

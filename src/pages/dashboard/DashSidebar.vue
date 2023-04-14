@@ -2,15 +2,15 @@
     <div class="sidebar" :style="{width: sidebarWidth}">
         <div class="tete">
             <h1 v-if="collapsed">
-                <img class="imglogo" src="../../assets/Logo.png" alt="">
+                <img class="imglogo" src="../../assets/image/Logo.png" alt="">
         </h1>
         <h1 v-else>
-                <img class="imglogo" src="../../assets/Logo.png" alt="">
+                <img class="imglogo" src="../../assets/image/Logo.png" alt="">
                 <p>Libère-toi</p>
         </h1>
         </div>
         
-        <DashSidebarLink to="/dashboard" icon="fas fa-home">Home</DashSidebarLink>
+        <DashSidebarLink to="/" icon="fas fa-home">Home</DashSidebarLink>
         <DashSidebarLink to="/dashboardHome" icon="fas fa-columns">Dashboard</DashSidebarLink>
         <DashSidebarLink to="/dashboardClient" icon="fas fa-users">Client</DashSidebarLink>
         <DashSidebarLink to="/dashboardVendeur" icon="fas fa-user">Vendeur</DashSidebarLink>

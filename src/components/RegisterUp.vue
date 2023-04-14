@@ -2,7 +2,7 @@
     <div class="login-card-container">
             <div class="login-card">
                 <div class="login-card-logo">
-                    <img src="../assets/Logo.png" alt="logo">
+                    <img src="../assets/image/Logo.png" alt="logo">
                 </div>
                 <div class="login-card-header">
                     <h1>Sign up</h1>
