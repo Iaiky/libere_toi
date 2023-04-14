@@ -2,7 +2,7 @@
         <div class="login-card-container">
             <div class="login-card">
                 <div class="login-card-logo">
-                    <img src="../assets/Logo.png" alt="logo">
+                    <img src="../assets/image/Logo.png" alt="logo">
                 </div>
                 <div class="login-card-header">
                     <h1>Se connecter</h1>
@@ -29,7 +29,7 @@
                     <button v-on:click="Login">Se connecter</button>
                 </form>
                 <div class="login-card-footer">
-                    Pas de compte? <a href="./inscription.html">Créer gratuitement ici</a>
+                    Pas de compte? <router-link to="/RegisterUp">Créer gratuitement ici</router-link>
                 </div>
             </div>
             <div class="login-card-social">

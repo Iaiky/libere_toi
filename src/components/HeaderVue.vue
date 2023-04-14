@@ -2,7 +2,7 @@
     <input type="checkbox" id="check">
     <div class="navbar">
         <div class="logo">
-            <img src="../assets/Logo.png" />
+            <img src="../assets/image/Logo.png" />
             <div class="nav-title">
                 <h2>Libère-toi</h2>
             </div>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import Logo from '../assets/Logo.png';
+import Logo from '../assets/image/Logo.png';
 export default {
     name : 'HeaderVue',
     methods:{
@@ -72,7 +72,7 @@ export default {
             }else if (xy===3){
                 return this.$router.push({name:'VendeurPage'});
             }else {
-                return this.$router.push({name:'Dashboard'});
+                return this.$router.push({name:'DashboardHome'});
             }
         }          
     },
@@ -176,6 +176,7 @@ export default {
     justify-content:end;
     align-items: center;
     padding-right: 10px;
+    gap: 8px;
 }
 
 .navbar .connexion a {
@@ -253,7 +254,6 @@ input[type="checkbox"]{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 12px;
     cursor: pointer;
 }
 

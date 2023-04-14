@@ -2,25 +2,22 @@
     <HeaderVue/>
     <div class="vendeur-profile">
         <div class="header-wrapper">
-            <header></header>
+            <div class="hd"><img :src="require(`../assets/image/${vendeur.couverture}`)" alt=""></div>
             <div class="cols-container">
                 <div class="left-col">
                     <div class="img-container">
-                        <div v-on:click="toggleModale1" class="list-serv" >
-                            <img src="../assets/Z.jpg" alt="">
-                        </div>
+                        <img class="couverture" :src="require(`../assets/image/${vendeur.profile}`)" alt="">
                         <span></span>
                     </div>
                     <h2>{{ vendeur.nom }}</h2>
-                    <p>{{ vendeur.profession }}</p>
                     <p>{{ vendeur.email }}</p>
 
                     <ul class="about">
-                        <li v-for="item in vendeur.service" :key="item.ids"><span>{{ item.nombre }}</span>{{ item.noms }}</li>
+                        <li v-for="item in test" :key="item.ids"><span>{{ item.nombre }}</span>{{ item.noms }}</li>
                     </ul>
 
                     <div class="content">
-                        <p>{{ vendeur.description }}</p>
+                        <p>{{ vendeur.bio }}</p>
 
                         <ul>
                             <li><i class="fab fa-twitter"></i></li>
@@ -41,11 +38,9 @@
                     </nav>
 
                     <div class="photos">
-                        <div v-on:click="toggleModale" class="list-serv" v-for="item in vendeur.service" :key="item.ids">
-                            <p>{{ item.desc }}</p>
-                            
-                            <img :src="require(`../assets/${item.src}`)" alt="" class="card-img1">
-                            <p>{{ item.noms }}</p>
+                        <div v-on:click="toggleModale" class="list-serv" v-for="item in test" :key="item.ids">
+                            <p>{{ item.noms }}</p>                           
+                            <img :src="require(`../assets/image/${item.src}`)" alt="" class="card-img1">
                         </div>
                     </div>
                 </div>
@@ -57,6 +52,7 @@
 
 <script>
     import HeaderVue from '../components/HeaderVue.vue'
+    import axios from 'axios'
 
     import vendeur from '../assets/vendeur'
     import ModalTest from './ModalTest'
@@ -65,9 +61,11 @@
         name :'VendeurPage',
         data() {
             return {
-                vendeur : vendeur,
+                vendeur : '',
                 revele : false,
-                revele1 : false
+                user:'',
+                test : vendeur,
+
             }
         },
         methods:{
@@ -75,23 +73,41 @@
             
             this.$router.push({name:'ChatPage'});
             
+
         },
         toggleModale: function(){
             this.revele = !this.revele
-        },
-        toggleModale1: function(){
-            this.revele1 = !this.revele1
         },
         },
         components:{
             HeaderVue,
             'modale': ModalTest, 
              
+
+            },
+            toggleModale: function(){
+                this.revele = !this.revele
+            },
+            async loadData(id){
+                let result = await axios.get("http://localhost:3000/vendeur/"+id);
+                this.vendeur = result.data[0];
+            },
+        },
+        components:{
+            HeaderVue,
+            'modale': ModalTest
+        },
+        created(){
+            let users = localStorage.getItem('user-info');
+            this.user = users;
+            let idv = JSON.parse(users).data[0].iduser;
+
+            this.loadData(idv);
         }
     }
 </script>
 
-<style>
+<style scoped>
     .vendeur-profile{
         width: 80%;
         margin: 0;
@@ -118,11 +134,19 @@
         text-decoration: none;
     }
 
-    .header-wrapper header {
+    .header-wrapper .hd {
         width: 100%;
-        background: url(../assets/G.jpg) no-repeat 50% 20% / cover;
         min-height: calc(100px + 15vw);
+        background: #fff;
         border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header-wrapper .hd img {
+        width: auto;
+        max-height: calc(100px + 15vw);
     }
 
     .header-wrapper .cols-container .left-col {
@@ -269,6 +293,13 @@
         object-fit: cover;
         border-radius: 10px;
         background-color: #ccc;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .card-img1 {
+        max-width: 200px;
+        max-height: 200px;
     }
 
     /* responsiveness */
