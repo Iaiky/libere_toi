@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <modale v-bind:revele="revele" v-bind:toggleModale="toggleModale"></modale>
+        <modale v-bind:revele="revele" v-bind:toggleModale="toggleModale" v-bind:revele1="revele1" v-bind:toggleModale1="toggleModale1" ></modale>
     </div>
 </template>
 
@@ -56,6 +56,7 @@
 
     import vendeur from '../assets/vendeur'
     import ModalTest from './ModalTest'
+    import PdP from './PdP'
     export default {
         name :'VendeurPage',
         data() {
@@ -64,6 +65,7 @@
                 revele : false,
                 user:'',
                 test : vendeur,
+
             }
         },
         methods:{
@@ -71,6 +73,17 @@
             
             this.$router.push({name:'ChatPage'});
             
+
+        },
+        toggleModale: function(){
+            this.revele = !this.revele
+        },
+        },
+        components:{
+            HeaderVue,
+            'modale': ModalTest, 
+             
+
             },
             toggleModale: function(){
                 this.revele = !this.revele
