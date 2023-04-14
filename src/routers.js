@@ -26,6 +26,7 @@ import ServicesAv from './pages/ServicesAv.vue'
 import VendeurServices from './pages/VendeurServices.vue'
 import ProfilClient from './pages/ProfilClient.vue'
 import ModalTest from './pages/ModalTest.vue'
+import PdP from './pages/PdP.vue'
 import ListeService from './components/ListeService.vue'
 
 import CreationServices from './pages/CreationServices.vue'
@@ -163,6 +164,11 @@ const routes = [
         name : 'ModalTest',
         component : ModalTest,
         path: '/ModalTest'
+    },
+    {
+        name : 'PdP',
+        component : PdP,
+        path: '/PdP'
     },
 ];
 const router = createRouter({

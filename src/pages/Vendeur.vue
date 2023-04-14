@@ -6,7 +6,9 @@
             <div class="cols-container">
                 <div class="left-col">
                     <div class="img-container">
-                        <img src="../assets/Z.jpg" alt="">
+                        <div v-on:click="toggleModale1" class="list-serv" >
+                            <img src="../assets/Z.jpg" alt="">
+                        </div>
                         <span></span>
                     </div>
                     <h2>{{ vendeur.nom }}</h2>
@@ -49,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <modale v-bind:revele="revele" v-bind:toggleModale="toggleModale"></modale>
+        <modale v-bind:revele="revele" v-bind:toggleModale="toggleModale" v-bind:revele1="revele1" v-bind:toggleModale1="toggleModale1" ></modale>
     </div>
 </template>
 
@@ -58,12 +60,14 @@
 
     import vendeur from '../assets/vendeur'
     import ModalTest from './ModalTest'
+    import PdP from './PdP'
     export default {
         name :'VendeurPage',
         data() {
             return {
                 vendeur : vendeur,
-                revele : false
+                revele : false,
+                revele1 : false
             }
         },
         methods:{
@@ -75,10 +79,14 @@
         toggleModale: function(){
             this.revele = !this.revele
         },
+        toggleModale1: function(){
+            this.revele1 = !this.revele1
+        },
         },
         components:{
             HeaderVue,
-            'modale': ModalTest
+            'modale': ModalTest, 
+             
         }
     }
 </script>

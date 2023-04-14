@@ -1,18 +1,15 @@
 <template>
-    <div class="body" v-if="revele" v-on:click="toggleModale" >
+    <div class="body" v-if="revele" v-on:click="toggleModale1" >
         <div class="modal_content">
             <div class="modal_header">
                 <h1 class="modal_title">
                     Je vais Créez votre Site Front End 
                 </h1>
-                <button class="modal_close" v-on:click="toggleModale">x</button>
+                <button class="modal_close" v-on:click="toggleModale1">x</button>
             </div>
             <div class="modal_body">
                 <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                    Pariatur fuga impedit, voluptatibus laboriosam mollitia dicta non consectetur 
-                    illum asperiores! Enim blanditiis quod laboriosam quo fugit,
-                    fuga ad tempora maxime neque!
+                    LCEDRIC
                 </p>
             </div>
         </div>
@@ -20,8 +17,8 @@
 </template>
 <script>
 export default {
-    name : "ModalTest",
-    props : ['revele', 'toggleModale']
+    name : "PdP",
+    props : ['revele1', 'toggleModale1']
     
 };
 </script>

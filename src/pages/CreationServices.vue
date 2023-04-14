@@ -8,8 +8,12 @@
             </div>
             <form>
                 <div class="list-title1">
-                    <h2>Titre et Cathégorie</h2>
+                    <h2>Titre de service</h2>
                     <input class="input" type="text" id="Titre" placeholder="Titre..." required>
+                </div> 
+                <div class="list-title1">
+                    <h2>Cathégorie du services</h2>
+                    <input class="input" type="text" id="Cathégorie" placeholder="Cathégorie..." required>
                 </div> 
                 <div class="list-title1">
                     <h2>Prix</h2>
@@ -29,7 +33,10 @@
                 </div>
                 <div class="list-title1">
                     <h2>Galerie</h2>
-                    <input class="input" type="text" id="Galerie" placeholder="Galérie..." required>
+                    <div class="box_image">
+                        <div class="imagePreviewWrapper" :style="{ 'background-image' : `url(${ previewImage})` }" @click="selectImage"></div>
+                        <input ref="fileInput" type="file" @input="pickfile">
+                    </div>
                 </div> 
                 <button class="button" type="submit">Publication</button>
             </form>
@@ -45,7 +52,8 @@
         name:'ListVue',
         data(){
             return{
-                ListAV : services
+                ListAV : services,
+                previewImage :null
             }
         },
         methods:{
@@ -56,7 +64,22 @@
         },
             async login(){
 
-            }
+            },
+            selectImage () {
+            this.$refs.fileInput.click()
+        },
+            pickfile () {
+             let input = this.$refs.fileInput
+             let file = input.files
+             if (file && file[0]) {
+                let reader = new FileReader
+                reader.onload = e => {
+                    this.previewImage = e.target.result
+                }
+                reader.readAsDataURL (file[0])
+                this.$emit('input', file[0])
+             } 
+        }
         },
         mounted(){
             
@@ -133,5 +156,20 @@ form {
     width: 100%;
     cursor: pointer;
 
+}
+.imagePreviewWrapper{
+    width: 250px;
+    height: 250px;
+    display: block;
+    cursor: pointer;
+    margin: 0 auto 30px;
+    background-size: cover;
+    background-position: center center;
+    background-image: 'url( ${previewImage} )';
+
+}
+.box_image{
+    background: #fff;
+    border-radius: 30px;
 }
 </style>
