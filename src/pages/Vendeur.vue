@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <modale v-bind:revele="revele" v-bind:toggleModale="toggleModale" v-bind:revele1="revele1" v-bind:toggleModale1="toggleModale1" ></modale>
+        <modale v-bind:revele="revele" v-bind:toggleModale="toggleModale"  ></modale>
     </div>
 </template>
 
@@ -56,7 +56,7 @@
 
     import vendeur from '../assets/vendeur'
     import ModalTest from './ModalTest'
-    import PdP from './PdP'
+  
     export default {
         name :'VendeurPage',
         data() {
@@ -78,25 +78,16 @@
         toggleModale: function(){
             this.revele = !this.revele
         },
-        },
-        components:{
-            HeaderVue,
-            'modale': ModalTest, 
-             
-
-            },
-            toggleModale: function(){
-                this.revele = !this.revele
-            },
-            async loadData(id){
+        async loadData(id){
                 let result = await axios.get("http://localhost:3000/vendeur/"+id);
                 this.vendeur = result.data[0];
             },
         },
         components:{
             HeaderVue,
-            'modale': ModalTest
+            'modale': ModalTest,   
         },
+        
         created(){
             let users = localStorage.getItem('user-info');
             this.user = users;
