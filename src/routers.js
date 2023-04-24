@@ -130,6 +130,8 @@ const routes = [
         component : DashboardValidation,
         path: '/dashboardValidation'
     },
+
+    // Fin dashboard
     {
         name : 'ClientPage',
         component : ClientPage,

@@ -6,54 +6,70 @@
             <div class="list-title">
                 <h1>Creation de services</h1>
             </div>
-            <form>
+            <form enctype="multipart/form-data">
+                
                 <div class="list-title1">
                     <h2>Titre de service</h2>
-                    <input class="input" type="text" id="Titre" placeholder="Titre..." required>
+                    <input class="input" type="text" v-model="titre" id="Titre" placeholder="Titre..." required>
                 </div> 
                 <div class="list-title1">
                     <h2>Cathégorie du services</h2>
-                    <input class="input" type="text" id="Cathégorie" placeholder="Cathégorie..." required>
+                    <v-select :options="listCategorie" :reduce="(list) => list.categorie" v-model="categorie" label="titre"></v-select>
                 </div> 
                 <div class="list-title1">
                     <h2>Prix</h2>
-                    <input class="input" type="text" id="Prix" placeholder="Prix..." required>
+                    <input class="input" type="number" v-model="prix" id="Prix" placeholder="Prix..." required>
                 </div>
                 <div class="list-title1">
                     <h2>Description </h2>
-                    <textarea class="input"  id="Description" placeholder="Description..." required></textarea>
+                    <textarea class="input" v-model="description"  id="Description" placeholder="Description..." required></textarea>
                 </div>
                 <div class="list-title1">
                     <h2>Delai</h2>
-                    <input class="input" type="text" id="Delai" placeholder="Delai..." required>
-                </div>
-                <div class="list-title1">
-                    <h2>Consigne de réalisation</h2>
-                    <textarea class="textarea"  id="Consigne" rows="8" placeholder="Consigne de réalisation..." required></textarea>
+                    <input class="input" type="text" v-model="delai" id="Delai" placeholder="Delai..." >
                 </div>
                 <div class="list-title1">
                     <h2>Galerie</h2>
                     <div class="box_image">
-                        <div class="imagePreviewWrapper" :style="{ 'background-image' : `url(${ previewImage})` }" @click="selectImage"></div>
-                        <input ref="fileInput" type="file" @input="pickfile">
+                    <avatar-input @fileImage="imageFile" v-model="image" :default-src="require(`../assets/image/no_image.png`)"></avatar-input>
                     </div>
-                </div> 
-                <button class="button" type="submit">Publication</button>
+                </div>
+                <div class="list-title1">
+                    <h2>Consigne de réalisation</h2>
+                    <textarea class="textarea"  id="Consigne" v-model="consigne" rows="8" placeholder="Consigne de réalisation..." required></textarea>
+                </div>
+                <button class="button" v-on:click="creeService">Publication</button>
             </form>
         </div>
-            
     </div>
 </template>
 <script>
+    import axios from 'axios'
 
     import HeaderVue from '../components/HeaderVue.vue'
     import services from "../assets/services"
+    import AvatarInput from '@/components/AvatarInput.vue'
+
     export default{
         name:'ListVue',
         data(){
             return{
                 ListAV : services,
-                previewImage :null
+                previewImage :null,
+                listCategorie:[],
+                titre:'',
+                categorie:'',
+                prix:'',
+                description:'',
+                delai:'',
+                consigne:'',
+                image_source: '',
+                message : '',
+                error : false,
+                idvendeur:null,
+                user:'',
+                image:''
+
             }
         },
         methods:{
@@ -61,47 +77,91 @@
             
             this.$router.push({name:'ServicesAv'});
             
-        },
-            async login(){
-
             },
-            selectImage () {
-            this.$refs.fileInput.click()
+            async creeService(){
+                const formData = new FormData();
+                formData.append('file', this.image);
+
+                try{
+                    let result = await axios.post('http://localhost:3000/upload/single', formData); 
+                    console.warn(result.data.file.filename);
+                    this.image_source = result.data.file.filename;
+                    this.message = "File has been uploaded";
+                    this.image = "";
+                    this.error = false;
+
+                    try{
+                        var qs = require('qs');
+                        let service = await axios.post("http://localhost:3000/service/",
+                        qs.stringify({
+                            description:this.description,
+                            idcategorie:this.categorie,
+                            titre:this.titre,
+                            prix:this.prix,
+                            delai:this.delai,
+                            consigne:this.consigne,
+                            idvendeur:this.idvendeur,
+                            image_source:this.image_source,
+                        })
+                    );
+                    console.warn(service);
+                    if(service.status==200){
+                        this.$router.push({name:'VendeurPage'})
+                    }
+                    }catch (err){
+                    this.messge = "Something went wrong";
+                    this.error = true;                }
+                        
+                    
+
+                }catch (err){
+                    this.messge = "Something went wrong";
+                    this.error = true;                }
+                
+            },
+            imageFile(value){
+                console.log(value)
+                this.image = value;
+            },
+            // async showImg(){
+            //     let result = await axios.get('http://localhost:3000/vendeur/img');
+            //     this.src = result.data[0].source;
+            // }
+            async getCategorie(){
+                let result = await axios.get('http://localhost:3000/categorie/listeNomCategorie');
+                this.listCategorie = result.data.data;
+            }
         },
-            pickfile () {
-             let input = this.$refs.fileInput
-             let file = input.files
-             if (file && file[0]) {
-                let reader = new FileReader
-                reader.onload = e => {
-                    this.previewImage = e.target.result
-                }
-                reader.readAsDataURL (file[0])
-                this.$emit('input', file[0])
-             } 
-        }
-        },
+        async created(){
+            let users = localStorage.getItem('user-info');
+            this.user = users;           
+            this.idvendeur = JSON.parse(users).data[0].iduser;
+    },
         mounted(){
-            
+            this.getCategorie();
         },
         components:{
             HeaderVue,
+            AvatarInput,
+            vSelect: window["vue-select"]
         }
     }
 </script>
-<style>
+<style scoped>
+@import "vue-select/dist/vue-select.css";
+
 .list-AV2 {
+    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    align-self: center;
 }
 .list-AV2 .liste2 {
     
         justify-content: center;
         align-items: center;
-        padding: 4rem;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+        padding: 2rem;
         border-radius: 10px;
         width: 1170px;
         background: #ffffffc4;
@@ -112,7 +172,7 @@
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     }
 form {
-    width:90% ;
+    width:100% ;
     max-width: 600px;
     justify-content: center;
     align-items: center;

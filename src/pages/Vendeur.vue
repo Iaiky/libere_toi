@@ -2,6 +2,7 @@
     <HeaderVue/>
     <div class="vendeur-profile">
         <div class="header-wrapper">
+
             <div class="hd"><img :src="require(`../assets/image/${vendeur.couverture}`)" alt=""></div>
             <div class="cols-container">
                 <div class="left-col">
@@ -34,13 +35,14 @@
                             <li><a href="#">historique</a></li>
                            
                         </ul>
+                        <button v-on:click="Create">Créer service</button>
                         <button v-on:click="Message">Message</button>
                     </nav>
 
                     <div class="photos">
-                        <div v-on:click="toggleModale" class="list-serv" v-for="item in test" :key="item.ids">
-                            <p>{{ item.noms }}</p>                           
-                            <img :src="require(`../assets/image/${item.src}`)" alt="" class="card-img1">
+                        <div v-on:click="toggleModale" class="list-serv" v-for="item in service" :key="item.idservice">
+                            <p>{{ item.titre }}</p>                           
+                            <img :src="item.image_source" alt="" class="card-img1">
                         </div>
                     </div>
                 </div>
@@ -65,6 +67,7 @@
                 revele : false,
                 user:'',
                 test : vendeur,
+                service:[]
 
             }
         },
@@ -74,14 +77,23 @@
             this.$router.push({name:'ChatPage'});
             
 
-        },
-        toggleModale: function(){
-            this.revele = !this.revele
-        },
-        async loadData(id){
-                let result = await axios.get("http://localhost:3000/vendeur/"+id);
-                this.vendeur = result.data[0];
             },
+            Create(){
+                this.$router.push({name:'CreationServices'});
+            },
+            
+            async getService(id){
+                let result = await axios.get("http://localhost:3000/service/"+id);
+                console.log(result.data);
+                this.service = result.data;
+            },
+            toggleModale: function(){
+                this.revele = !this.revele
+            },
+            async loadData(id){
+                    let result = await axios.get("http://localhost:3000/vendeur/"+id);
+                    this.vendeur = result.data[0];
+                },
         },
         components:{
             HeaderVue,
@@ -94,6 +106,7 @@
             let idv = JSON.parse(users).data[0].iduser;
 
             this.loadData(idv);
+            this.getService(idv);
         }
     }
 </script>
