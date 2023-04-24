@@ -8,22 +8,22 @@
                     <h1>Sign up</h1>
                     <div>Create account</div>
                 </div>
-                <form class="login-card-form">
+                <form class="login-card-form" ref="form" @submit.prevent="sendEmail">
                     <div class="form-item">
                         <div class="form-item-icon"><i style="font-size:24px" class="fa">&#xf2be;</i></div>
-                        <input type="text" v-model="nom" placeholder="Nom" required autofocus>
+                        <input type="text" name="nom" v-model="nom" placeholder="Nom" required autofocus>
                     </div>
                     <div class="form-item">
                         <div class="form-item-icon"><i style="font-size:24px" class="fa">&#xf2be;</i></div>
-                        <input type="text" v-model="prenom" placeholder="Prénom" required>
+                        <input type="text" name="prenom" v-model="prenom" placeholder="Prénom" required>
                     </div>
                     <div class="form-item">
                         <div class="form-item-icon"><i class="material-icons">&#xe0be;</i></div>
-                        <input type="email" v-model="email" placeholder="email" required>
+                        <input type="email" name="email" v-model="email" placeholder="email" required>
                     </div>
                     <div class="form-item">
                         <div class="form-item-icon"><i class="fa fa-phone"></i></div>
-                        <input type="tel" v-model="tel" placeholder="Numéro de téléphone" required>
+                        <input type="tel" name="tel" v-model="tel" placeholder="Numéro de téléphone" required>
                     </div>
                     <div class="form-item">
                         <div class="form-item-icon"><i class="material-icons">&#xe897;</i></div>
@@ -56,7 +56,7 @@
                             <p>En tant que client, vous pouvez rechercher des services.</p>
                         </div>
                     </div>
-                    <button v-on:click="register">S'inscrire</button>
+                    <button v-on:click="register" type="submit" value="Send">S'inscrire</button>
                 </form>
                 <div class="login-card-footer">
                     Vous avez déja un compte? <router-link to="/LoginUp">Connectez-vous ici</router-link>
@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import emailjs from '@emailjs/browser';
     import axios from 'axios'
 
     export default{
@@ -98,8 +99,26 @@
 
                 console.warn(result);
                 if(result.status==200){
-                    this.$router.push({name:'LoginUp'});
+                    if(this.type===3){
+                        this.$router.push({name:'HomeVue'})
+                    } else { return this.$router.push({name:'LoginUp'})}
                 }
+            },
+            sendEmail() {
+                emailjs.sendForm('service_libere', 'template_2rra368', this.$refs.form, 'qmgfDldg-8BgvQiZH')
+                
+                .then((result) => {
+                    
+                    console.log('SUCCESS!', result.text);
+                    alert('Merci pour votre inscription, veuillez vous connecter XD')
+                }, (error) => {
+                    console.log('FAILED...', error.text);
+                });
+                this.nom = '',
+                this.prenom = '',
+                this.email = '',
+                this.message = '',
+                this.type = ''
             }
         },
         mounted(){

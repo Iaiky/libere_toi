@@ -28,6 +28,10 @@ import ProfilClient from './pages/ProfilClient.vue'
 import ModalTest from './pages/ModalTest.vue'
 import PdP from './pages/PdP.vue'
 import ListeService from './components/ListeService.vue'
+import TestVU from './pages/TestVU.vue'
+import EditAvatar from './pages/EditAvatar.vue'
+import FormulaireTemoinage from './pages/FormulaireTemoinage.vue'
+import AvatarInput from './pages/AvatarInput.vue'
 
 import CreationServices from './pages/CreationServices.vue'
 import {createRouter,createWebHistory} from 'vue-router'
@@ -172,6 +176,26 @@ const routes = [
         component : PdP,
         path: '/PdP'
     },
+    {
+        name : 'TestVU',
+        component : TestVU,
+        path: '/TestVU'
+    },
+    {
+        name : 'EditAvatar',
+        component : EditAvatar,
+        path: '/EditAvatar'
+    },
+    {
+        name : 'AvatarInput',
+        component : AvatarInput,
+        path: '/AvatarInput'
+    },
+    {
+        name : 'FormulaireTemoinage',
+        component : FormulaireTemoinage,
+        path : '/FormulaireTemoinage'
+    }
 ];
 const router = createRouter({
     history : createWebHistory(),
