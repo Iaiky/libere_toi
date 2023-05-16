@@ -3,55 +3,32 @@
     <div class="client-profile">
         <div class="component-1">
             <nav>
-                <button>Commande</button>
+                <button v-on:click="toggleModale">Commande</button>
                 <button>Message</button>
             </nav>   
         </div>
         <div class = "component-2">
             <div class ="Block">
-                <h2>Historique</h2>
-                    <div class="col-div-6">
-                        <div class="box-6">
-                            <div class="content-box">
-                                <table>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Id Service</th>
-                                        <th>Service</th>
-                                    </tr>
-                                    <tr v-for="item in donnee" :key="item.id" >
-                                        <td>{{ item.company }}</td>
-                                        <td>{{ item.contact }}</td>
-                                    </tr>
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
+                <h2>Historique de commande</h2>
+                <Historique :data="historique" />
             </div>
             <div class="Block">
                 <h2>Validation Paiement</h2>
-                
-                    <div class="col-div-6">
-                        <div class="box-6">
-                            <div class="content-box">
-                                <table>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Id Service</th>
-                                        <th>Service</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    <tr v-for="item in donnee" :key="item.id" >
-                                        <td>{{ item.company }}</td>
-                                        <td>{{ item.contact }}</td>
-                                        <td>{{ item.country }}</td>
-                                    </tr>
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
+                <!-- <table class="historique-liste">
+                    <tr>
+                        <th>Date</th>
+                        <th>idCommande</th>
+                        <th>motif</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr v-for="item in payer" :key="item.idcommande">
+                        <td>{{ item.dateCreation }}</td>
+                        <td>{{item.idcommande}}</td>
+                        <td>{{ item.motif }}</td>
+                        <td><button>Valider</button></td>
+                    </tr>
+                </table> -->
+                <Historique :data="payer" />
                 </div>
             </div>
             <div class="component-2">
@@ -60,27 +37,58 @@
                 </div>
             </div>
         </div>
-        
+        <CommandeModale 
+        v-bind:revele="revele" 
+        v-bind:toggleModale="toggleModale"/>
         
 </template>
 
 <script>
     import HeaderVue from '../components/HeaderVue.vue'
+    import Historique from '../components/Historique.vue'
+    import CommandeModale from '../components/CommandeModale.vue'
+    import axios from 'axios'
 
     import vendeur from '../assets/vendeur'
     export default {
         name :'VendeurPage',
         data() {
             return {
-                vendeur : vendeur
+                vendeur : vendeur,
+                payer : [],
+                revele : false,
+                historique : [],
+                
             }
         },
         methods:{
-
+            async getValidCommandeClient(id){
+                let result = await axios.get("http://localhost:3000/commande/validClient/"+id);
+                // console.log(result.data);
+                this.payer = result.data;
+            },
+            toggleModale: function(){
+                this.revele = !this.revele
+            },
+            async getCommandeClient(id){
+                let result = await axios.get("http://localhost:3000/commande/commandeClient/"+id);
+                // console.log(result.data);
+                this.historique = result.data;
+            },
         },
         components:{
-            HeaderVue
-        }
+            HeaderVue,
+            Historique,
+            CommandeModale
+        },
+        async created(){
+            let users = localStorage.getItem('user-info');
+            this.user = users;           
+            this.userID = JSON.parse(users).data[0].iduser;
+            this.getValidCommandeClient(this.userID);
+            this.getCommandeClient(this.userID);
+        },
+
     }
 </script>
 

@@ -136,7 +136,7 @@
             let users = localStorage.getItem('user-info');
             this.user = users;           
             this.idvendeur = JSON.parse(users).data[0].iduser;
-    },
+        },
         mounted(){
             this.getCategorie();
         },

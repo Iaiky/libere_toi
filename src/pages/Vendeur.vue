@@ -39,17 +39,27 @@
                         <button v-on:click="Message">Message</button>
                     </nav>
 
-                    <div class="photos">
-                        <div v-on:click="toggleModale" class="list-serv" v-for="item in service" :key="item.idservice">
-                            <p>{{ item.titre }}</p>                           
-                            <img :src="item.image_source" alt="" class="card-img1">
+                    <div class="activity">
+                        <div class="photos">
+                            <div  class="list-serv" v-for="item in service" :key="item.idservice" v-on:click="openModal(item)">
+                                <p>{{ item.titre }}</p>                           
+                                <img :src="item.image_source" alt="" class="card-img1">
+                            </div>
                         </div>
-                    </div>
+                        <Historique :data="historique" />
+                    </div>    
                 </div>
             </div>
         </div>
-        <modale v-bind:revele="revele" v-bind:toggleModale="toggleModale"  ></modale>
+ 
     </div>
+
+        <BaseModal 
+        v-bind:revele="revele" 
+        v-bind:toggleModale="toggleModale"
+        v-bind:service="serviceModal"
+        />
+
 </template>
 
 <script>
@@ -57,8 +67,10 @@
     import axios from 'axios'
 
     import vendeur from '../assets/vendeur'
-    import ModalTest from './ModalTest'
-  
+    import BaseModal from '../components/BaseModal.vue'
+    import Historique from '../components/Historique.vue'
+
+
     export default {
         name :'VendeurPage',
         data() {
@@ -67,7 +79,10 @@
                 revele : false,
                 user:'',
                 test : vendeur,
-                service:[]
+                service:[],
+                showModal :false,
+                serviceModal:{},
+                historique:[]
 
             }
         },
@@ -93,11 +108,21 @@
             async loadData(id){
                     let result = await axios.get("http://localhost:3000/vendeur/"+id);
                     this.vendeur = result.data[0];
-                },
+            },
+            openModal(service) {
+                this.serviceModal = service;
+                this.revele = true;
+            },
+            async getCommandeVendeur(id){
+                let result = await axios.get("http://localhost:3000/commande/validVendeur/"+id);
+                // console.log(result.data);
+                this.historique = result.data;
+            },
         },
         components:{
             HeaderVue,
-            'modale': ModalTest,   
+            BaseModal,
+            Historique
         },
         
         created(){
@@ -107,6 +132,7 @@
 
             this.loadData(idv);
             this.getService(idv);
+            this.getCommandeVendeur(idv);
         }
     }
 </script>
@@ -285,6 +311,7 @@
     }
 
     .header-wrapper .cols-container .right-col .photos {
+        flex: 50%;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
         gap: 20px;
@@ -301,10 +328,34 @@
         flex-direction: column;
         align-items: center;
     }
+
+    .header-wrapper .cols-container .right-col .photos .list-serv:hover {
+        cursor: pointer;
+        background: #f1f1f1;
+        box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.18);
+        transition: 0.35s;
+    }
     .card-img1 {
         max-width: 200px;
         max-height: 200px;
     }
+
+    .activity {
+        display: flex;
+        gap: 5px;
+    }
+
+    .historique {
+        flex: 50%;
+        width: 300px;
+    }
+
+    .historique-liste {
+        display: flex;
+    }
+
+
+
 
     /* responsiveness */
 

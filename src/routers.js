@@ -27,7 +27,7 @@ import VendeurServices from './pages/VendeurServices.vue'
 import ProfilClient from './pages/ProfilClient.vue'
 import ModalTest from './pages/ModalTest.vue'
 import PdP from './pages/PdP.vue'
-import ListeService from './components/ListeService.vue'
+import ListeCategorie from './pages/ListeCategorie.vue'
 import TestVU from './pages/TestVU.vue'
 import EditAvatar from './pages/EditAvatar.vue'
 import FormulaireTemoinage from './pages/FormulaireTemoinage.vue'
@@ -162,9 +162,9 @@ const routes = [
         path: '/Profil'
     },
     {
-        name : 'ListeService',
-        component : ListeService,
-        path: '/ListeService'
+        name : 'ListeCategorie',
+        component : ListeCategorie,
+        path: '/ListeCategorie'
     },
     {
         name : 'ModalTest',

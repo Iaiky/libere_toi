@@ -102,11 +102,13 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 10px 14px;
+        /* padding: 10px 14px; */
     }
      
     .card-image1 .name {
         font-size: 23px;
+        padding: 10px;
+        margin: 10px;
     }
 
     .card-image1 img {
