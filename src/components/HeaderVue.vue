@@ -15,7 +15,7 @@
                         <a href="#" v-on:click="Services">Services</a>
                     </li>
                     <li>
-                        <a href="#">Blog</a>
+                        <a href="#">Temoignages</a>
                     </li>  
                 </ul>
             </div>
