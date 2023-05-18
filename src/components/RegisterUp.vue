@@ -49,6 +49,13 @@
                                 <div class="form-item-icon"><i class="fa fa-phone"></i></div>
                                 <input type="text" v-model="CIN_Passeport" placeholder="Numéro de CIN ou passeport">
                             </div>
+                            <div></div>
+                            <br/>
+                            <div class="form-item">
+                                <img :src="src" alt="Avatar" class ="CIN"><br/>
+                                <button @click="ouvrir()">Photos du N°Cin ou Passeport</button>
+                            </div>
+                            <input type="file" accept="image/*" class="miafina" ref="file" @change="change">
                         </div>
 
                         <!-- client -->
@@ -79,7 +86,9 @@ import emailjs from '@emailjs/browser';
                 tel:'',
                 mdp:'',
                 CIN_Passeport: '',
-                type: 2
+                type: 2,
+                src : this.defaultSrc,
+                file : null
             }
         },
         methods:{
@@ -119,6 +128,18 @@ import emailjs from '@emailjs/browser';
                 this.email = '',
                 this.message = '',
                 this.type = ''
+            },
+            ouvrir() {
+                this.$refs.file.click();
+            },
+            change(e) {
+                this.file = e.target.files[0];
+                this.$emit('input', this.file);
+                let reader = new FileReader();
+                reader.readAsDataURL(this.file);
+                reader.onload = (e) => {
+                    this.src = e.target.result;
+                }
             }
         },
         mounted(){
@@ -127,7 +148,7 @@ import emailjs from '@emailjs/browser';
     }
 </script>
 
-<style>
+<style scoped>
 .login-card-container {
     display: flex;
     flex-direction: column;
@@ -312,6 +333,15 @@ import emailjs from '@emailjs/browser';
   transform: scale(1.1);
 }
 
+.CIN {
+    width: 290px;
+    height: 120px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border-radius: 5%;
+    display: block;
+    box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.18);
+}
 
 @media (max-width: 768px) {
 

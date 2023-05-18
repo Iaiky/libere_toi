@@ -7,30 +7,23 @@
                     <div class="ul">
                         <li><a href="#" v-on:click="Touch">About us</a></li>
                         <li><a href="#" v-on:click="Touch1">Our services</a></li>
-                        <li><a href="#" v-on:click="Touch2">Privacy policy</a></li>
-                        <li><a href="#" v-on:click="Touch3">Affiliate Program</a></li>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Get help</h4>
                     <div class="ul">
                         <li><a href="#" v-on:click="Pointer">FAQ</a></li>
-                        <li><a href="#" v-on:click="Pointer1">Shipping</a></li>
-                        <li><a href="#" v-on:click="Pointer2">order statuts</a></li>
-                        <li><a href="#" v-on:click="Pointer3">payement options</a></li>
+                        <li><a href="#" v-on:click="Pointer1">CGU</a></li>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>SAV</h4>
                     <div class="ul">
-                        <li><a href="#">watch</a></li>
-                        <li><a href="#">bag</a></li>
-                        <li><a href="#">shoes</a></li>
-                        <li><a href="#">dress</a></li>
+                        <li><a href="#">What ?</a></li>
                     </div>
                 </div>
                 <div class="footer-col">
-                    <h4>Folllow us</h4>
+                    <h4>Contact</h4>
                     <div>
                         <a href="#"><i class="fa fa-facebook-f"></i></a>
                     </div>
