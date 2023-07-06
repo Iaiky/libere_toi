@@ -15,7 +15,7 @@
                         <a href="#" v-on:click="Categorie">Categories</a>
                     </li>
                     <li>
-                        <a href="#">Blog</a>
+                        <a href="#">Temoignages</a>
                     </li>  
                 </ul>
             </div>
