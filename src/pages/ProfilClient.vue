@@ -4,13 +4,13 @@
         <div class="component-1">
             <nav>
                 <button v-on:click="toggleModale">Commande</button>
-                <button>Message</button>
+                <button v-on:click="this.$router.push({name:'ChatPage'})">Message</button>
             </nav>   
         </div>
         <div class = "component-2">
             <div class ="Block">
                 <h2>Historique de commande</h2>
-                <Historique :data="historique" />
+                <Historique :data="historique"/>
             </div>
             <div class="Block">
                 <h2>Validation Paiement</h2>
@@ -28,7 +28,7 @@
                         <td><button>Valider</button></td>
                     </tr>
                 </table> -->
-                <Historique :data="payer" />
+                <Historique :data="payer" valide="yes"/>
                 </div>
             </div>
             <div class="component-2">

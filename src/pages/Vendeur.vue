@@ -7,7 +7,7 @@
             <div class="cols-container">
                 <div class="left-col">
                     <div class="img-container">
-                        <img class="couverture" :src="require(`../assets/image/${vendeur.profile}`)" alt="">
+                        <img class="couverture" :src="require(`../assets/image/${vendeur.pdp}`)" alt="">
                         <span></span>
                     </div>
                     <h2>{{ vendeur.nom }}</h2>
@@ -46,12 +46,11 @@
                                 <img :src="item.image_source" alt="" class="card-img1">
                             </div>
                         </div>
-                        <Historique :data="historique" />
+                        <Historique :data="historique" valide="yes"/>
                     </div>    
                 </div>
             </div>
         </div>
- 
     </div>
 
         <BaseModal 
@@ -66,7 +65,7 @@
     import HeaderVue from '../components/HeaderVue.vue'
     import axios from 'axios'
 
-    import vendeur from '../assets/vendeur'
+    import vendeurs from '../assets/vendeur'
     import BaseModal from '../components/BaseModal.vue'
     import Historique from '../components/Historique.vue'
 
@@ -75,14 +74,21 @@
         name :'VendeurPage',
         data() {
             return {
-                vendeur : '',
+                vendeur : {
+                    couverture:'',
+                    pdp:'',
+                    nom:'',
+                    email:'',
+                    bio:''
+                },
                 revele : false,
                 user:'',
-                test : vendeur,
+                test : vendeurs,
                 service:[],
                 showModal :false,
                 serviceModal:{},
-                historique:[]
+                historique:[],
+                
 
             }
         },
@@ -130,16 +136,26 @@
             this.user = users;
             let idv = JSON.parse(users).data[0].iduser;
 
-            this.loadData(idv);
+            // this.loadData(idv);
             this.getService(idv);
             this.getCommandeVendeur(idv);
+
+            this.vendeur.couverture = JSON.parse(users).data[0].photo_couverture;
+            this.vendeur.pdp = JSON.parse(users).data[0].photoProfil;
+            this.vendeur.nom = (JSON.parse(users).data[0].nom)+' '+(JSON.parse(users).data[0].prenom);
+            this.vendeur.email = JSON.parse(users).data[0].email;
+            this.vendeur.bio = JSON.parse(users).data[0].bio;
+        },
+
+        mounted(){
+
         }
     }
 </script>
 
 <style scoped>
     .vendeur-profile{
-        width: 80%;
+        width: 90%;
         margin: 0;
         padding: 0;
         box-sizing: border-box;

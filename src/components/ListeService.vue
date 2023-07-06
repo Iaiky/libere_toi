@@ -4,10 +4,10 @@
             <div class="list-title">
                 <h1>Catégorie de services</h1>
             </div> 
-            <div class="list-list-1" v-on:click="Voir">
+            <div class="list-list-1" >
                 <div class="AV-1" v-for="item in listeCategorie" :key="item.categorie">
                         
-                        <div class="card-image1">
+                        <div class="card-image1" v-on:click="Voir(item.categorie)">
                                 <h2 class="name">{{ item.titre }}</h2>
                                 <img :src="require(`../assets/image/${item.source}`)" alt="" class="card-img1">                             
                         </div>
@@ -29,9 +29,9 @@
             }
         },
         methods:{
-            Voir(){
+            Voir(id){
             
-            this.$router.push({name:'ServicesAv'});
+            this.$router.push({path: "/ListeServiceByCategorie/"+id});
             
         },
         async loadData(){

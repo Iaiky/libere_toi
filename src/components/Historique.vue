@@ -5,13 +5,13 @@
                 <th>Date</th>
                 <th>idCommande</th>
                 <th>motif</th>
-                <th>Action</th>
+                <th v-if="valide">Action</th>
             </tr>
             <tr v-for="item in data" :key="item.idcommande">
                 <td>{{ item.dateCreation }}</td>
                 <td>{{item.idcommande}}</td>
                 <td>{{ item.motif }}</td>
-                <td><button>Valider</button></td>
+                <td v-if="valide"><button>Valider</button></td>
             </tr>
         </table>
     </div>
@@ -27,6 +27,7 @@
         },
         props:{
             data:{type : Array, required : true},
+            valide:{type : String, required : false}
         },
         methods:{
 

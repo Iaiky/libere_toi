@@ -4,166 +4,69 @@
         <div class="Chat-container">
 
             <!-- LeftSide -->
-            <div class="leftSide">              
-                <!-- header -->
-                <div class="header">
-                    <div class="userimg">
-                        <img src="../assets/Z.jpg" alt="" class="cover">
-                    </div>
-                    <ul class="nav_icons">
-                        <li><i class="material-icons">&#xe8c4;</i></li>
-                        <li><i class="material-icons">&#xe0ca;</i></li>
-                        <li><i style="font-size:24px" class="fa">&#xf142;</i></li>
-                    </ul>
-                </div>
-                <!-- search -->
-                <div class="search_chat">
-                    <div>
-                        <input type="text" placeholder="Recherche ..." id="">
-                        <i class="material-icons">&#xe8b6;</i>
-                    </div>
-                </div>
-                <!-- Chat list -->
-                <div class="chatlist">
-                    <div class="block active">
-                        <div class="imgbox">
-                            <img src="../assets/Naej.png" alt="" class="cover">
-                        </div>
-                        <div class="details">
-                            <div class="listHead">
-                                <h4>Iaikitiana Naej</h4>
-                                <p class="time">10:56</p>
-                            </div>
-                            <div class="message_p">
-                                <p>Make whatsapp like app with html css</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div v-for="item in chatList" :key="item.id">
-                        <div  v-if="item.LastMessage.vue === true" class="block" v-on:click="item.LastMessage.vue === false" >
-                            <div class="imgbox">
-                                <img :src="require(`../assets/${item.src}`)" alt="" class="cover">
-                            </div>
-                            <div class="details">
-                                <div class="listHead">
-                                    <h4>{{item.nom}}</h4>
-                                    <p class="time">{{item.LastMessage.time}}</p>
-                                </div>
-                                <div class="message_p">
-                                    <p>{{item.LastMessage.desc}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div  v-if="item.LastMessage.vue === false" class="block unread">
-                            <div class="imgbox">
-                                <img :src="require(`../assets/${item.src}`)" alt="" class="cover">
-                            </div>
-                            <div class="details">
-                                <div class="listHead">
-                                    <h4>{{item.nom}}</h4>
-                                    <p class="time">{{item.LastMessage.time}}</p>
-                                </div>
-                                <div class="message_p">
-                                    <p>{{item.LastMessage.desc}}</p>
-                                    <b>!</b>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
+            <ChatList/>
 
 
             <!-- RightSide -->
-            <div class="rightSide">
-                <div class="header">
-                    <div class="imgText">
-                        <div class="userimg">
-                            <img :src="require(`../assets/${message.src}`)" alt="" class="cover">
-                        </div>
-                        <h4>{{ message.nom }}<br><span>online</span></h4>
-                    </div>
-                    <ul class="nav_icons">
-                        <li><i class="material-icons">&#xe8b6;</i></li>
-                        <li><i style="font-size:24px" class="fa">&#xf142;</i></li>
-                    </ul>
-                </div>
-
-                <!-- Chatbox -->
-                <div class="chatBox">
-                    <div class="message my-message">
-                        <p>hi<br><span>12:15</span></p>
-                    </div>
-                    <div class="message frnd-message">
-                        <p>Hello<br><span>12:15</span></p>
-                    </div>
-                    <div v-for="item in message.messages" :key="item.id" >
-                        <div v-if="item.send === 'me'" class="message my-message">
-                            <p>{{ item.desc }}<br><span>{{ item.time }}</span></p>
-                        </div>
-                        <div v-if="item.send === 'them'" class="message frnd-message">
-                            <p>{{ item.desc }}<br><span>{{ item.time }}</span></p>
-                        </div>
-                    </div>
-                    
-                </div>
-
-                <!-- input chatbox -->
-                <div class="chatbox-input">
-                    <i style="font-size:24px" class="fa">&#xf118;</i>
-                    <i class="material-icons">&#xe226;</i>
-                    <input type="text" placeholder="Tapez votre message..">
-                    <i style="font-size:24px" class="fa">&#xf1d8;</i>
-                </div>
-            </div>
+            <ChatMessage/>
+            
         </div>
     </div>
 
 </template>
 
 <script>
-    import HeaderVue from '../components/HeaderVue.vue'
-    import ChatExample from '../assets/chatExample'
-    import message from '../assets/messageExample'
+    import HeaderVue from '../../components/HeaderVue.vue'
+    import ChatList from './ChatList.vue'
+    import ChatMessage from './ChatMessage.vue'
+    
     export default {
         name:'ChatVue',
         components : {
-            HeaderVue
+            HeaderVue,
+            ChatList,
+            ChatMessage
         },
         data() {
             return {
-                chatList : ChatExample,
                 layout : 'active',
-                message : message
+                username :'',
+                usertype :'',
+                userPDP :''
             }
         },
         methods : {
             
-        }
+        },
+        async created(){
+            let users = localStorage.getItem('user-info');
+            this.user = users;           
+            this.username = JSON.parse(users).data[0].prenom;
+            this.usertype= JSON.parse(users).data[0].type;
+            this.userPDP= JSON.parse(users).data[0].photoProfil;
+        },
     }
 
 </script>
 
-<style>
+<style >
     .Chat {
-        width: 80%;
+        width: 85%;
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         background: #ffffffc4;
         /* min-height: 80vh; */
-        max-height: 80vh;
+        /* max-height: 80vh; */
         align-self: center;
-        padding: 0.5rem;
+        /* padding: 0.5rem; */
         border-radius: 10px;
         gap: 3px;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 100vh;
+        min-height: 90vh;
     }
 
     .Chat-container {
@@ -396,14 +299,14 @@
         overflow-y: auto;
     }
 
-    .Chat-container .message {
+    .Chat-container .messages {
         position: relative;
         display: flex;
         width: 100%;
         margin: -20px 0;
     }
 
-    .Chat-container .message p {
+    .Chat-container .messages p {
         position: relative;
         right: 0;
         text-align: right;
@@ -414,7 +317,7 @@
         font-size: 0.9em;
     }
 
-    .Chat-container .message p::before {
+    .Chat-container .messages p::before {
         content: '';
         position: absolute;
         top: 0;
@@ -424,7 +327,7 @@
         background: linear-gradient(135deg, #f8c6f0 0%, #f8c6f0 50%, transparent 50%, transparent);
     }
 
-    .Chat-container .message p span {
+    .Chat-container .messages p span {
         display: block;
         margin-top: 5px;
         font-size: 0.85em;
@@ -444,7 +347,7 @@
         text-align: left;
     }
 
-    .Chat-container .message.frnd-message p::before {
+    .Chat-container .messages.frnd-message p::before {
         content: '';
         position: absolute;
         top: 0;
@@ -470,6 +373,13 @@
         font-size: 1.8em;
         color: #51585c;
     }
+
+    .Chat-container .chatbox-input i:hover {
+        cursor: pointer;
+        font-size: 1.9em;
+        color: #51585c;
+    }
+
     .Chat-container .chatbox-input i:nth-child(1){
         margin-right: 15px;
     }

@@ -10,7 +10,7 @@ import ShippingVue from './pages/ShippingVue'
 import OrderStatuts from './pages/OrderStatuts'
 import PayementOptions from './pages/PayementOptions'
 import VendeurPage from './pages/Vendeur.vue'
-import ChatPage from './pages/Chat.vue'
+import ChatPage from './pages/Chat/Chat.vue'
 
 // Admin dashboard import pages
 import AdminVue from './pages/dashboard/AdminVue.vue'
@@ -28,6 +28,7 @@ import ProfilClient from './pages/ProfilClient.vue'
 import ModalTest from './pages/ModalTest.vue'
 import PdP from './pages/PdP.vue'
 import ListeCategorie from './pages/ListeCategorie.vue'
+import ListeServiceByCategorie from './pages/ListeServiceByCategorie.vue'
 import TestVU from './pages/TestVU.vue'
 import EditAvatar from './pages/EditAvatar.vue'
 import FormulaireTemoinage from './pages/FormulaireTemoinage.vue'
@@ -97,11 +98,19 @@ const routes = [
         component : VendeurPage,
         path: '/vendeur'
     },
+
+
+    // MEEEEEEEEEESSSSSSSSSSSSSSSAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGEEEEEEEEEEEEEEEEEEEEEEEEEEEE
     {
         name : 'ChatPage',
         component : ChatPage,
-        path: '/chat'
+        path: '/chat/:idreceveur'
     },
+
+
+
+
+
 
     // Dashboard route..............................................
     {
@@ -165,6 +174,11 @@ const routes = [
         name : 'ListeCategorie',
         component : ListeCategorie,
         path: '/ListeCategorie'
+    },
+    {
+        name : 'ListeServiceByCategorie',
+        component : ListeServiceByCategorie,
+        path: '/ListeServiceByCategorie/:idCategorie'
     },
     {
         name : 'ModalTest',

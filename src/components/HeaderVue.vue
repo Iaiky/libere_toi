@@ -28,7 +28,7 @@
         <div class="connexion" v-if="user" >    
             <div class="imgText" v-on:click="DirectToPofil(usertype)" >
                 <div class="userimg">
-                    <img :src="require(`../assets/Z.jpg`)" alt="" class="cover">
+                    <img :src="require(`../assets/image/${userPDP}`)" alt="" class="cover">
                 </div>
             </div>        
             <p>{{ username }}</p>
@@ -81,7 +81,8 @@ export default {
             logoIcon: Logo,
             user : '',
             username:'',
-            usertype:''
+            usertype:'',
+            userPDP:''
         }
     },
     // async mounted(){
@@ -95,6 +96,7 @@ export default {
             this.user = users;           
             this.username = JSON.parse(users).data[0].prenom;
             this.usertype= JSON.parse(users).data[0].type;
+            this.userPDP= JSON.parse(users).data[0].photoProfil;
     },
    
 }
